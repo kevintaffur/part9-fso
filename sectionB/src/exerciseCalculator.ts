@@ -1,3 +1,24 @@
+const n: number = process.argv.length;
+
+if (n < 4) {
+  throw new Error("Incorrect number of arguments");
+}
+
+const period: Array<number> = [];
+
+for (let i = 2; i < n - 1; i++) {
+  const day = Number(process.argv[i]);
+  if (isNaN(day)) {
+    throw new Error("Provided values were not numbers");
+  }
+  period.push(day);
+}
+
+const target: number = Number(process.argv[n - 1]);
+if (isNaN(target)) {
+  throw new Error("Provided values were not numbers");
+}
+
 type Rating = 1 | 2 | 3;
 
 interface Result {
@@ -44,8 +65,5 @@ const calculateExercises = (
     ratingDescription,
   };
 };
-
-const period: Array<number> = [3, 0, 2, 4.5, 0, 3, 1];
-const target: number = 2;
 
 console.log(calculateExercises(period, target));

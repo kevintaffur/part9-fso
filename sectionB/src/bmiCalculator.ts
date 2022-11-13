@@ -1,3 +1,14 @@
+if (process.argv.length < 4 || process.argv.length > 4) {
+  throw new Error("Incorrect number of arguments");
+}
+
+if (isNaN(Number(process.argv[2])) || isNaN(Number(process.argv[3]))) {
+  throw new Error("Provided values were not numbers");
+}
+
+const height: number = Number(process.argv[2]);
+const weight: number = Number(process.argv[3]);
+
 const calculateBmi = (height: number, weight: number): string => {
   const heightInMeters: number = height / 100;
   const bmi = weight / (heightInMeters * heightInMeters);
@@ -23,4 +34,4 @@ const calculateBmi = (height: number, weight: number): string => {
   }
 };
 
-console.log(calculateBmi(180, 74));
+console.log(calculateBmi(height, weight));
