@@ -37,13 +37,17 @@ const calculateExercises = (
 ): Result => {
   const periodLength: number = exerciseHours.length;
   const trainingDays: number = exerciseHours.filter((day) => day !== 0).length;
-  const check: number = exerciseHours.find((day) => day < target);
-  const success: boolean = check < target ? false : true;
+  let success: boolean = false;
+  if (exerciseHours.find((day) => day < target)) {
+    success = false;
+  } else {
+    success = true;
+  }
   const averageTime: number =
     exerciseHours.reduce((acc, day) => acc + day, 0) / periodLength;
 
-  let ratingDescription: string;
-  let rating: Rating;
+  let ratingDescription: string = "";
+  let rating: Rating = 1;
   if (averageTime < target) {
     ratingDescription = "Not too bad but could be better";
     rating = 1;
