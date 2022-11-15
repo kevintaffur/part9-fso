@@ -1,23 +1,23 @@
-const n: number = process.argv.length;
+// const n: number = process.argv.length;
 
-if (n < 4) {
-  throw new Error("Incorrect number of arguments");
-}
+// if (n < 4) {
+//   throw new Error("Incorrect number of arguments");
+// }
 
-const period: Array<number> = [];
+// const period: Array<number> = [];
 
-for (let i = 2; i < n - 1; i++) {
-  const day = Number(process.argv[i]);
-  if (isNaN(day)) {
-    throw new Error("Provided values were not numbers");
-  }
-  period.push(day);
-}
+// for (let i = 2; i < n - 1; i++) {
+//   const day = Number(process.argv[i]);
+//   if (isNaN(day)) {
+//     throw new Error("Provided values were not numbers");
+//   }
+//   period.push(day);
+// }
 
-const target: number = Number(process.argv[n - 1]);
-if (isNaN(target)) {
-  throw new Error("Provided values were not numbers");
-}
+// const target = Number(process.argv[n - 1]);
+// if (isNaN(target)) {
+//   throw new Error("Provided values were not numbers");
+// }
 
 type Rating = 1 | 2 | 3;
 
@@ -31,13 +31,13 @@ interface Result {
   ratingDescription: string;
 }
 
-const calculateExercises = (
+export const calculateExercises = (
   exerciseHours: Array<number>,
   target: number
 ): Result => {
   const periodLength: number = exerciseHours.length;
   const trainingDays: number = exerciseHours.filter((day) => day !== 0).length;
-  let success: boolean = false;
+  let success = false;
   if (exerciseHours.find((day) => day < target)) {
     success = false;
   } else {
@@ -46,7 +46,7 @@ const calculateExercises = (
   const averageTime: number =
     exerciseHours.reduce((acc, day) => acc + day, 0) / periodLength;
 
-  let ratingDescription: string = "";
+  let ratingDescription = "";
   let rating: Rating = 1;
   if (averageTime < target) {
     ratingDescription = "Not too bad but could be better";
@@ -70,4 +70,4 @@ const calculateExercises = (
   };
 };
 
-console.log(calculateExercises(period, target));
+// console.log(calculateExercises(period, target));
