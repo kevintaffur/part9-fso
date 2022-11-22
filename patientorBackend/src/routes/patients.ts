@@ -28,4 +28,14 @@ router.post("/", (req, res) => {
   }
 });
 
+router.get("/:id", (req, res) => {
+  const patient = patientService.getPatientById(req.params.id);
+  if (!patient) {
+    res.status(404).send({
+      error: "Patient not found",
+    });
+  }
+  res.send(patient);
+});
+
 export default router;

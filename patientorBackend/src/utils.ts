@@ -1,4 +1,4 @@
-import { Gender, NewPatient } from "./types";
+import { Entry, Gender, NewPatient } from "./types";
 
 type Fields = {
   name: unknown;
@@ -6,6 +6,7 @@ type Fields = {
   ssn: unknown;
   gender: unknown;
   occupation: unknown;
+  entries: unknown;
 };
 const toNewPatient = ({
   name,
@@ -13,6 +14,7 @@ const toNewPatient = ({
   ssn,
   gender,
   occupation,
+  entries,
 }: Fields): NewPatient => {
   const newPatient: NewPatient = {
     name: parseString(name),
@@ -20,6 +22,7 @@ const toNewPatient = ({
     ssn: parseSsn(ssn),
     gender: parseGender(gender),
     occupation: parseString(occupation),
+    entries: parseEntries(entries),
   };
   return newPatient;
 };
@@ -50,6 +53,18 @@ const parseGender = (gender: unknown): Gender => {
     throw new Error("Incorrect or missing gender: " + gender);
   }
   return gender;
+};
+
+const parseEntries = (entries: unknown): Array<Entry> => {
+  if (!entries || !isArray(entries)) {
+    throw new Error("Not entries");
+  }
+  return entries;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isArray = (arr: any): arr is Array<Entry> => {
+  return Array.isArray(arr);
 };
 
 const isString = (text: unknown): text is string => {
